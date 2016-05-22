@@ -69,8 +69,7 @@ public class Review {
 			Iterator<Entry<String, Integer>> iter = this.reviewDoc.get(i)
 					.getWordMap().entrySet().iterator();
 			while (iter.hasNext()) {
-				Entry<String, Integer> entry = (Entry<String, Integer>) iter
-						.next();
+				Entry<String, Integer> entry = iter.next();
 				if (allWords.containsKey(entry.getKey())) {
 					allWords.put(entry.getKey(), allWords.get(entry.getKey())
 							.update(this.category));
