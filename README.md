@@ -14,7 +14,7 @@ We rank each term by their chi-square value in descend order and choose the firs
 
 ## Train
 
-To train the SVM classifier, we use the review data for cell phones from [jd.com](jd.com), where each review is tagged as *good* or *bad*. We use this tag information as the sentiment label for the reviews. After splitting reviews into short sentences, we get 176,640 short sentences, 73.2% of them are labeled positive and 26.8% are labeled negative. Since the same opinion word may have different orientations in different aspects (e.g. the phrase `the screen resolution is high` is positive, but the phrase `the price is high` is negative), we train an SVM classifier for each of the 17 aspects separately. The training data is available in `data/trainCorpus/` folder. The trained model is available in `resource/svm/` folder.
+To train the SVM classifier, we use the review data for cell phones from [jd.com](http://www.jd.com), where each review is tagged as *good* or *bad*. We use this tag information as the sentiment label for the reviews. After splitting reviews into short sentences, we get 176,640 short sentences, 73.2% of them are labeled positive and 26.8% are labeled negative. Since the same opinion word may have different orientations in different aspects (e.g. the phrase `the screen resolution is high` is positive, but the phrase `the price is high` is negative), we train an SVM classifier for each of the 17 aspects separately. The training data is available in `data/trainCorpus/` folder. The trained model is available in `resource/svm/` folder.
 
 ## Test
 
