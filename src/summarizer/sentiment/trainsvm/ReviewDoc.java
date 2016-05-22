@@ -1,11 +1,13 @@
 package summarizer.sentiment.trainsvm;
 
 import jnisvmlight.FeatureVector;
+import thulac.segment.ThuLac;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //import tool.weibo.nlpir.Nlpir;
@@ -41,18 +43,19 @@ public class ReviewDoc {
 	}
 
 	public void setWordMap() {
-//		String[] words = Nlpir.NlpirSegmentation(content).split(" ");
-//		for (int i = 0; i < words.length; i++) {
-//			Matcher m = p.matcher(words[i]);
-//			if (m.find() && !StopWordUtil.isStopWord(words[i])) {
-//				totalWordNum++;
-//				if (wordMap.containsKey(words[i])) {
-//					wordMap.put(words[i], wordMap.get(words[i]) + 1);
-//				} else
-//					wordMap.put(words[i], 1);
-//			}
-//
-//		}
+		String[] words = ThuLac.segment(content).split(" ");
+		for (int i = 0; i < words.length; i++) {
+            words[i] = words[i].substring(0, words[i].lastIndexOf('/'));
+			Matcher m = p.matcher(words[i]);
+			if (m.find() && !StopWordUtil.isStopWord(words[i])) {
+				totalWordNum++;
+				if (wordMap.containsKey(words[i])) {
+					wordMap.put(words[i], wordMap.get(words[i]) + 1);
+				} else
+					wordMap.put(words[i], 1);
+			}
+
+		}
 	}
 
 	public HashMap<String, Integer> getWordMap() {
@@ -73,7 +76,7 @@ public class ReviewDoc {
 		Iterator<Entry<String, Integer>> iter = this.wordMap.entrySet()
 				.iterator();
 		while (iter.hasNext()) {
-			Entry<String, Integer> entry = (Entry<String, Integer>) iter.next();
+			Entry<String, Integer> entry = iter.next();
 			this.tfMap.put(entry.getKey(),
 					entry.getValue() * 1.0 / Math.sqrt(totalWordNum));
 		}

@@ -59,10 +59,9 @@ public class TrainSVM {
 	public void saveFeature() {
 		this.positive.updateAllWords(allWords);
 		this.negative.updateAllWords(allWords);
-		Iterator<Entry<String, Word>> iter = this.allWords.entrySet()
-				.iterator();
+		Iterator<Entry<String, Word>> iter = this.allWords.entrySet().iterator();
 		while (iter.hasNext()) {
-			Entry<String, Word> entry = (Entry<String, Word>) iter.next();
+			Entry<String, Word> entry = iter.next();
 			entry.getValue().setChi(N, this.positive.getReviewDoc().size(),
 					this.negative.getReviewDoc().size());
 			sortedWord.add(entry.getValue());
