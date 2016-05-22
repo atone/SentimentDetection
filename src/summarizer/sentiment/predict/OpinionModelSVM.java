@@ -2,6 +2,7 @@ package summarizer.sentiment.predict;
 
 import jnisvmlight.FeatureVector;
 import jnisvmlight.SVMLightModel;
+import thulac.segment.ThuLac;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -131,7 +132,7 @@ public class OpinionModelSVM {
 		return svml.classify(fv);
 	}
 
-	public static ArrayList<Integer> predict(ArrayList<String> splitedTextAL, String aspect) {
+	public static ArrayList<Integer> predict(List<String> splitedTextAL, String aspect) {
 		ArrayList<Integer> labels = new ArrayList<Integer>();
 		singleSVMModel svml = DomAsptoSVMMap.get("手机" + aspect);
 
@@ -177,8 +178,8 @@ public class OpinionModelSVM {
 			if (!word2idMap.containsKey(w))
 				continue;
 			else {
-				// System.out.println("DEBUG: oms"+w.str+" "+
-				// word2idMap.get(w.str));
+//				 System.out.println("DEBUG: oms"+w+" "+
+//				 word2idMap.get(w));
 				wordMap.put(word2idMap.get(w), 1);
 			}
 		}
@@ -195,10 +196,11 @@ public class OpinionModelSVM {
 			j++;
 		}
 		FeatureVector fv = new FeatureVector(dims, values);
-		return fv;
+        return fv;
 	}
 
     public static void main(String[] args) {
-        System.out.println(predict("屏幕太小", "a3"));
+        System.out.println(predict(ThuLac.segment("屏幕不清晰"), "a3"));
+        System.out.println(predict(ThuLac.segment("就是屏幕大了有些不习惯"), "a3"));
     }
 }
