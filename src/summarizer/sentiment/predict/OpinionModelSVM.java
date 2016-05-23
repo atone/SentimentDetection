@@ -132,8 +132,8 @@ public class OpinionModelSVM {
 		return svml.classify(fv);
 	}
 
-	public static ArrayList<Integer> predict(List<String> splitedTextAL, String aspect) {
-		ArrayList<Integer> labels = new ArrayList<Integer>();
+	public static List<Integer> predict(List<String> splitedTextAL, String aspect) {
+		List<Integer> labels = new ArrayList<>();
 		singleSVMModel svml = DomAsptoSVMMap.get("手机" + aspect);
 
 		for (int i = 0; i < splitedTextAL.size(); i++) {
@@ -202,5 +202,5 @@ public class OpinionModelSVM {
     public static void main(String[] args) {
         System.out.println(predict(ThuLac.segment("屏幕不清晰"), "a3"));
         System.out.println(predict(ThuLac.segment("就是屏幕大了有些不习惯"), "a3"));
-    }
+	}
 }

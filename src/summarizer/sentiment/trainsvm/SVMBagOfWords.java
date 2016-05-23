@@ -25,7 +25,7 @@ public class SVMBagOfWords extends SVM{
 		this.nega = FileIO.readXmlFile(this.trainCor + "/negative");
 	}
 	
-	public void setSVMFolder(String svmFolderPath){
+	public static void setSVMFolder(String svmFolderPath){
 		svmFolder=svmFolderPath;
 	}
 

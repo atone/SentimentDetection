@@ -11,7 +11,7 @@ public class Train {
 	public static String trainCorpus="./resource/trainCorpus/";
 	
 	
-	public void setTrainCorpus(String traincorpusPath){
+	public static void setTrainCorpus(String traincorpusPath){
 		trainCorpus=traincorpusPath;
 	}
 	/**

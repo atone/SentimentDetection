@@ -23,5 +23,71 @@ We randomly select 5500 short sentences for testing. The test set is not used fo
 - [dataset for Exp A](https://raw.githubusercontent.com/atone/SentimentDetection/master/data/test/exp_a.txt)
 - [dataset for Exp B](https://raw.githubusercontent.com/atone/SentimentDetection/master/data/test/exp_b.txt)
 
+## Code Explanation
+
+To run this code, first clone it to your local disk: 
+
+```
+git clone https://github.com/atone/SentimentDetection.git
+```
+
+then download the model files for [THULAC](http://thulac.thunlp.org/message), unzip the model files and put it in `resource/thulac_models/`.
+
+### Train the Model
+
+By default, we have provided the trained model file, so you don't need to train it yourself. However, if you still want to train the SVM model, use the class `Train` at package `summarizer.sentiment.trainsvm`:
+
+```java
+public static void setTrainCorpus(String traincorpusPath)
+```
+set the data corpus path for training.
+
+```java
+public static void trainBagOfWords(int aspectID)
+```
+train the SVM model for the specific aspectID (range from 1 to 17).
+
+To set where the model files are saved, use the class `SVMBagOfWords`:
+
+```java
+public static void setSVMFolder(String svmFolderPath)
+```
+set the folder where the SVM model files are stored, default is `./resource/svm/`
+
+### Use the Model
+
+To use the model, first set where to find the SVM model files:
+
+```java
+public static void setSVMFolder(String svmFolderPath)
+```
+by default, we have the trained model stored in `./resource/svm/`, so this step is optional.
+
+The following two methods in `summarizer.sentiment.predict.OpinionModelSVM` are used for predict sentiment of phrases:
+
+```java
+public static int predict(String splitedText, String aspect)
+public static List<Integer> predict(List<String> splitedTextList, String aspect)
+```
+The first method is used for predicting a single phrase, the result is 1 if positive and -1 if negative. The second method is used for predicting a list of phrases, the result is a list of results. The `aspect` parameter is used for denote the aspect of the phrase, e.g., if the aspect ID is 1, then pass `"a1"` as the parameter.
+
+Note: the phrase must be POS tagged before calling the `predict` method. To do the POS tagging, use the static method in `thulac.segment.ThuLac`:
+
+```java
+public static String segment(String original)
+```
+
+For example, 
+
+```java
+String example = "我爱北京天安门。";
+String tagged = ThuLac.segment(example);
+System.out.println(tagged);
+```
+
+the result is: `我/r 爱/v 北京/ns 天安门/ns 。/w`.
+
+
+
 
 
