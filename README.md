@@ -71,6 +71,13 @@ public static List<Integer> predict(List<String> splitedTextList, String aspect)
 ```
 The first method is used for predicting a single phrase, the result is 1 if positive and -1 if negative. The second method is used for predicting a list of phrases, the result is a list of results. The `aspect` parameter is used for denote the aspect of the phrase, e.g., if the aspect ID is 1, then pass `"a1"` as the parameter.
 
+For example,
+
+```java
+int polarity = OpinionModelSVM.predict(ThuLac.segment("屏幕不清晰"), "a3");
+```
+the result is `-1`.
+
 Note: the phrase must be POS tagged before calling the `predict` method. To do the POS tagging, use the static method in `thulac.segment.ThuLac`:
 
 ```java
